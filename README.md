@@ -1,6 +1,6 @@
 # Autocomplete
 ## Description
-Autocomplete is a simple experiment in building a autocomplete querying system within terminal.
+Autocomplete is a simple experiment in building a autocomplete querying system within the console.
 
 ## Process
 Before starting the project, I had heard about Tries and wanted to experiment with them. So, this project was created. 

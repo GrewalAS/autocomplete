@@ -17,8 +17,12 @@ class Trie:
 
     Stores the root of the trie. Contains implementation for insert and search, no implementation of delete.
     """
-    # The root of the trie
-    root = Node("-1")
+    def __init__(self):
+        """
+        The initializer.
+        """
+        # The root of the trie, this is where the tree will begin
+        self.root = Node("-1")
 
     def insert(self, to_insert):
         """

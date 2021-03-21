@@ -76,7 +76,7 @@ class Trie:
         :return:
         """
         # The set of words to return
-        words = set()
+        words = []
         # Will be used to traverse the stack
         stack = [node]
         # Add the node to the stack
@@ -87,11 +87,12 @@ class Trie:
 
         # Iterate until the stack becomes empty
         while len(stack) > 0:
-            if node.leaf:
-                words.add(word)
             # If there are no children, cannot go any deeper, pop this item from the stack and assign the last item to
             # node
             if len(node.children) == 0:
+                if node.leaf:
+                    words.append(word)
+
                 # Has no children, remove from stack and decrease the word length
                 stack.pop()
                 word = word[:-1]
@@ -101,6 +102,8 @@ class Trie:
             else:
                 # The node has not been visited before, add a cvt and continue
                 if node.unique_id not in cvt:
+                    if node.leaf:
+                        words.append(word)
                     # Assign cvt
                     cvt[node.unique_id] = 0
                     # Add to stack

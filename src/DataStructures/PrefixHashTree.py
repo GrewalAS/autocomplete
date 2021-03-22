@@ -31,8 +31,8 @@ class PrefixHashTree:
         """
         # To generate the substring from to_insert, beginning from the start with len = 1 to len = len(to_insert - 1) to
         # create the keys that will act as the keys.
-        for l in range(1, len(to_insert)):
-            substr = to_insert[0: l]
+        for i in range(1, len(to_insert) + 1):
+            substr = to_insert[0: i]
 
             if substr in self.map:
                 self.map[substr].add(to_insert)
@@ -49,4 +49,21 @@ class PrefixHashTree:
         :param prefix:
         :return:
         """
-        return self.map.get(prefix, set())
+        return list(self.map.get(prefix, []))
+
+# if __name__ == "__main__":
+#     # Create a trie and populate it
+#     tree = PrefixHashTree()
+#     tree.insert("doge")
+#     tree.insert("dog")
+#     tree.insert("dog")
+#     tree.insert("dot")
+#     tree.insert("dogs")
+#     tree.insert("cat")
+#     tree.insert("cats")
+#     tree.insert("da")
+#     tree.insert("")
+#
+#     print(tree.map)
+#
+#     print(tree.query("cat"))

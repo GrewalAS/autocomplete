@@ -47,7 +47,7 @@ class Node:
             self.children.append(node)
             self.children_index[node.value] = len(self.children) - 1
         else:
-            raise ValueError("attempting to insert duplicate child: '{0}'".format(node.value))
+            raise ValueError("Node::add_child attempting to insert duplicate child: '{0}'".format(node.value))
 
     def __unique_identifier(self):
         """

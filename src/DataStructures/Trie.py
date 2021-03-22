@@ -8,7 +8,7 @@ does not have an implementation of delete.
 More details at:
     https://en.wikipedia.org/wiki/Trie
 """
-from Node import Node
+from src.DataStructures.Node import Node
 
 
 class Trie:
@@ -137,3 +137,18 @@ class Trie:
                         node = stack[-1]
 
         return words
+
+# if __name__ == "__main__":
+#     # Create a trie and populate it
+#     trie = Trie()
+#     trie.insert("doge")
+#     trie.insert("dog")
+#     trie.insert("dog")
+#     trie.insert("dot")
+#     trie.insert("dot")
+#     trie.insert("dogs")
+#
+#     trie.insert("cat")
+#     trie.insert("cats")
+#
+#     print(trie.query("cat"))

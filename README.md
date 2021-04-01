@@ -37,7 +37,7 @@ The following results were obtained:
 | 1000000    | 5.565568e-05   | 1.375930e-05  | 7.429206e-02     | 8.035530e-04    |
 
 
-As we can see from the results above, PHT is 2 order of magnitude faster than a trie at querying when 10000000 words are 
+As we can see from the results above, PHT is 2 order of magnitude faster than a trie at querying when 1000000 words are 
 stored in the PHT, and when querying less words, PHT is even 3 order of magnitude faster than a Trie. So PHT seems to be 
 a better struture for querying results quickly even though the results show an increase in query time per prefix. 
 

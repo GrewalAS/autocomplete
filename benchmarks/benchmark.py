@@ -3,8 +3,6 @@ Benchmark of the program using different data structures.
 """
 import time
 import random
-import pprint
-import sys
 from src.DataStructures.Trie import Trie
 from src.DataStructures.PrefixHashTree import PrefixHashTree
 from src.AutoComplete import AutoComplete
@@ -61,7 +59,6 @@ class Benchmark:
         timed_runs = {}
 
         for ds in self.data_structures_to_test:
-            print("benchmarking data structures: " + ds[0])
             start_time = time.perf_counter()
             returned_autocompletes.append(
                 self.__run_benchmark_multiple_times(
@@ -137,11 +134,8 @@ class Benchmark:
         # So the results can be saved
         results = None
         for i in range(times_to_run):
-            sys.stdout.write(
-                '\r' + "running iteration {0} of {1}, of {2}".format(i + 1, times_to_run, benchmark_to_run))
             results = benchmark_to_run(self, args[0])
 
-        print("\nfinished benchmarking: {0}".format(benchmark_to_run))
         return results
 
     def __insertions_from_file(self, data_structure):
@@ -199,31 +193,25 @@ class Benchmark:
             if len(result_sets[0]) != len(result_sets[0].intersection(result_sets[1])):
                 raise ResultsDifferForKey("Benchmark::compare_query_results: results do not match for key: " + key)
 
-        # No error were thrown, so every ran fine
-        print("compare_query_results...success")
-
 
 if __name__ == "__main__":
-    # Compare the two data structures
-    benchmark = Benchmark([("Trie", Trie), ("PrefixHashTree", PrefixHashTree)], "rand_words.txt", 10000)
-    # benchmark = Benchmark([("PrefixHashTree", PrefixHashTree)], "rand_words.txt")
-    times = benchmark.benchmark(1000)
+    print("| # of Words | IT/Word (Trie) | IT/Word (PHT) | QT/Prefix (Trie) | QT/Prefix (PHT) |")
+    print("|------------|----------------|---------------|------------------|-----------------|")
 
-    pprint.pprint(times)
-    print("Category: Trie vs. PrefixHashTree")
+    sizes_to_benchmark = [10000, 100000, 1000000]
+    prefixes_to_benchmark = 1000
+    number_to_times_to_run = 100
 
-    print("Total Insertion Time: {0} vs. {1}".format(
-        times["Trie"]["insertions"]["total_time"],
-        times["PrefixHashTree"]["insertions"]["total_time"]))
+    for size in sizes_to_benchmark:
+        # Compare the two data structures
+        benchmark = Benchmark([("Trie", Trie), ("PrefixHashTree", PrefixHashTree)], "rand_words.txt", size)
+        times = benchmark.benchmark(number_to_times_to_run, number_of_prefixes_to_benchmark=prefixes_to_benchmark)
 
-    print("Total Query Time: {0} vs. {1}".format(
-        times["Trie"]["queries"]["total_time"],
-        times["PrefixHashTree"]["queries"]["total_time"]))
+        print("|{0}|{1:2e}|{2:2e}|{3:2e}|{4:2e}|".format(
+            size,
+            times["Trie"]["insertions"]["time_per_run"]/size,
+            times["PrefixHashTree"]["insertions"]["time_per_run"]/size,
+            times["Trie"]["queries"]["time_per_run"]/prefixes_to_benchmark,
+            times["PrefixHashTree"]["queries"]["time_per_run"]/prefixes_to_benchmark
+        ))
 
-    print("Insertion Time Per Run: {0} vs. {1}".format(
-        times["Trie"]["insertions"]["time_per_run"],
-        times["PrefixHashTree"]["insertions"]["time_per_run"]))
-
-    print("Query Time Per Run: {0} vs. {1}".format(
-        times["Trie"]["queries"]["time_per_run"],
-        times["PrefixHashTree"]["queries"]["time_per_run"]))

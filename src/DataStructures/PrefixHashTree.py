@@ -50,20 +50,3 @@ class PrefixHashTree:
         :return:
         """
         return list(self.map.get(prefix, []))
-
-# if __name__ == "__main__":
-#     # Create a trie and populate it
-#     tree = PrefixHashTree()
-#     tree.insert("doge")
-#     tree.insert("dog")
-#     tree.insert("dog")
-#     tree.insert("dot")
-#     tree.insert("dogs")
-#     tree.insert("cat")
-#     tree.insert("cats")
-#     tree.insert("da")
-#     tree.insert("")
-#
-#     print(tree.map)
-#
-#     print(tree.query("cat"))

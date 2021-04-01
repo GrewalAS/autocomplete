@@ -137,18 +137,3 @@ class Trie:
                         node = stack[-1]
 
         return words
-
-# if __name__ == "__main__":
-#     # Create a trie and populate it
-#     trie = Trie()
-#     trie.insert("doge")
-#     trie.insert("dog")
-#     trie.insert("dog")
-#     trie.insert("dot")
-#     trie.insert("dot")
-#     trie.insert("dogs")
-#
-#     trie.insert("cat")
-#     trie.insert("cats")
-#
-#     print(trie.query("cat"))
